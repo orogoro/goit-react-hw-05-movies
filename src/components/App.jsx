@@ -1,16 +1,20 @@
-export const App = () => {
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+
+import Navigation from './Navigation/Navigation';
+import HomePage from './HomePage/HomePage';
+import MoviesPage from './MoviesPage/MoviesPage';
+
+export default function App() {
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
+    <div>
+      <Routes>
+        <Route path="/" element={<Navigation />}>
+          <Route path="" element={<HomePage />} />
+          <Route path="movies" element={<MoviesPage />} />
+          <Route path="*" element={<HomePage />} />
+        </Route>
+      </Routes>
     </div>
   );
-};
+}
