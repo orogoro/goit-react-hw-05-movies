@@ -1,6 +1,5 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-// import { Toaster } from 'react-hot-toast';
 
 import Navigation from './Navigation/Navigation';
 import HomePage from './HomePage/HomePage';
@@ -17,7 +16,6 @@ export default function App() {
         <Route path="movies/:itemId" element={<ItemPage />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
-      {/* <Toaster /> */}
     </>
   );
 }
