@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { getTrendFilms } from '../../services/axiosApi';
 import { LoaderSpiner } from '../Loader/Loader';
 
+import { StyledLink, Ul, Li, H1 } from './HomePage.styled';
+
 const useFetchItems = () => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -29,15 +31,18 @@ export default function HomePage() {
 
   return (
     <main>
-      <h1>Trending today</h1>
+      <H1>Trending today</H1>
       {loading && <LoaderSpiner />}
-      <ul>
+      <Ul>
         {items.map(item => (
-          <li key={item.id}>
-            <Link to={`/movies/${item.id}`}>{item.original_title}</Link>
-          </li>
+          <Li key={item.id}>
+            <StyledLink to={`/movies/${item.id}`}>
+              🎞
+              {item.original_title}
+            </StyledLink>
+          </Li>
         ))}
-      </ul>
+      </Ul>
     </main>
   );
 }

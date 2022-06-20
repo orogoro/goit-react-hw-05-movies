@@ -11,3 +11,17 @@ export async function getTrendFilmById(id) {
   const response = await axios.get(`/movie/${id}?api_key=${KEY_API}`);
   return response.data;
 }
+export async function getCreditsById(id) {
+  const response = await axios.get(`/movie/${id}/credits?api_key=${KEY_API}`);
+  return response.data.cast;
+}
+export async function getReviewsById(id) {
+  const response = await axios.get(`/movie/${id}/reviews?api_key=${KEY_API}`);
+  return response.data.results;
+}
+export async function getFetchFilms(item) {
+  const response = await axios.get(
+    `/search/movie?api_key=${KEY_API}&query=${item}`
+  );
+  return response.data.results;
+}
