@@ -1,14 +1,19 @@
 import styled from 'styled-components';
 
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
-export const StyleLink = styled(Link)`
-  padding: 3px;
+export const StyleLink = styled.button`
+  padding: 5px;
   text-decoration: none;
   border-radius: 3px;
+  border: none;
   color: #ffff;
   background-color: #fa6464;
   cursor: pointer;
+
+  &:hover {
+    background-color: #ff4747;
+  }
 `;
 
 export const Main = styled.main`

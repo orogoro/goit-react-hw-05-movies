@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import { useParams, Outlet } from 'react-router-dom';
+import { useParams, Outlet, useNavigate, useLocation } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
 import { getTrendFilmById } from '../../services/axiosApi';
+import { LoaderSpiner } from 'components/Loader/Loader';
 import Publication from './Publication/Publication';
 
 import {
@@ -19,6 +20,9 @@ export default function ItemPage() {
   const { itemId } = useParams();
   const [item, setItem] = useState(null);
 
+  let navigate = useNavigate();
+  let location = useLocation();
+
   useEffect(() => {
     async function getFetcheFilms() {
       try {
@@ -26,14 +30,33 @@ export default function ItemPage() {
         setItem(item);
       } catch (error) {
         toast.error('Фильм с таким ID не найдено');
+        setTimeout(() => navigate('/'), 1000);
       }
     }
     getFetcheFilms();
-  }, [itemId]);
+  }, [itemId, navigate]);
+
+  const onClickBtnBack = () => {
+    if (location.pathname === `/movies/${item.id}`) {
+      navigate(-1);
+      return;
+    } else if (location.pathname === `/movies/${item.id}/cast`) {
+      navigate(-2);
+      return;
+    } else if (location.pathname === `/movies/${item.id}/reviews`) {
+      navigate(-2);
+      return;
+    }
+    navigate('/');
+  };
 
   return (
     <Main>
-      <StyleLink to="/">🔙 Go back</StyleLink>
+      {item && <StyleLink onClick={onClickBtnBack}>🔙 Go back</StyleLink>}
+      {!item && <LoaderSpiner />}
+
+      {/* <StyleLink to="/">🔙 Go back</StyleLink> */}
+
       {item && <Publication item={item} />}
       {item && (
         <>

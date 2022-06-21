@@ -1,69 +1,56 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
+import { useSearchParams } from 'react-router-dom';
 
-import { getFetchFilms } from '../../services/axiosApi';
+import { getFetchFilms } from 'services/axiosApi';
+import MovieDetails from './MovieDetails/MovieDetails';
+import QueryFilms from './QueryFilms/QueryFilms';
+import { LoaderSpiner } from 'components/Loader/Loader';
 
 export default function MoviesPage() {
-  const [value, setValue] = useState('');
   const [qwery, setQwery] = useState('');
-  const [films, setFilms] = useState([]);
+  const [value, setValue] = useState('');
+  const [loading, setLoading] = useState(false);
+  let [searchParams, setSearchParams] = useSearchParams();
+  const currentSearch = searchParams.get('query');
 
-  const handleInputChange = e => {
-    setValue(e.currentTarget.value.toLowerCase());
-  };
-
-  const handleSubmit = e => {
-    e.preventDefault();
-
-    if (value.trim() === '') {
-      toast.error('Вы ничего не ввели');
-      return;
-    }
-    setQwery(value);
-    resetValue();
-  };
-
-  const resetValue = () => {
-    setValue('');
+  const searchQuery = name => {
+    setValue(name);
   };
 
   useEffect(() => {
-    async function fetchIdCast() {
+    setValue(currentSearch);
+  }, [currentSearch]);
+
+  useEffect(() => {
+    async function fetchFilms() {
       try {
-        const items = await getFetchFilms(qwery);
-        setFilms(items);
+        setLoading(true);
+        const values = await getFetchFilms(value);
+        if (values.length > 0) {
+          setQwery(values);
+          setSearchParams({ query: value });
+        } else {
+          toast.error('Фильм не найден');
+        }
       } catch (error) {
-        toast.error(`Что-то пошло не так`);
+        console.log(error);
+      } finally {
+        setLoading(false);
       }
     }
-
-    if (qwery) {
-      fetchIdCast();
+    if (value) {
+      fetchFilms();
     }
-  }, [qwery]);
+  }, [setSearchParams, value]);
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          onChange={handleInputChange}
-          value={value}
-          autoComplete="off"
-          autoFocus
-        />
-        <button type="submit">Search</button>
-      </form>
+    <main>
+      <MovieDetails onSubmit={searchQuery} />
 
-      <ul>
-        {films &&
-          films.map(film => (
-            <li key={film.id}>
-              <Link to={`/movies/${film.id}`}>{film.original_title}</Link>
-            </li>
-          ))}
-      </ul>
-    </>
+      {loading && <LoaderSpiner />}
+
+      {qwery && <QueryFilms qwery={qwery} />}
+    </main>
   );
 }
