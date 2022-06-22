@@ -1,4 +1,6 @@
 import { useLocation } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
 import { StyledLink, Ul, Li } from './QueryFilms.styled';
 
 export default function QueryFilms({ qwery }) {
@@ -15,3 +17,7 @@ export default function QueryFilms({ qwery }) {
     </Ul>
   );
 }
+
+QueryFilms.propTypes = {
+  key: PropTypes.string,
+};

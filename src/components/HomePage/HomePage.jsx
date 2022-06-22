@@ -1,5 +1,4 @@
-// import { useEffect, useState } from 'react';
-// import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { useFetchItems } from '../../services/CustomFetchItems';
 import { LoaderSpiner } from '../Loader/Loader';
 
@@ -46,3 +45,7 @@ export default function HomePage() {
     </main>
   );
 }
+
+HomePage.propTypes = {
+  key: PropTypes.string,
+};

@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import { Span, Article, Container, Ul } from './Publication.styled';
 
 export default function Publication({ item }) {
@@ -30,3 +32,8 @@ export default function Publication({ item }) {
     </Article>
   );
 }
+
+Publication.propTypes = {
+  key: PropTypes.string,
+  item: PropTypes.object,
+};

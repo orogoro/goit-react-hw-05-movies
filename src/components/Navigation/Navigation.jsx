@@ -1,7 +1,6 @@
 import React from 'react';
 import { Toaster } from 'react-hot-toast';
 
-// import { Outlet } from 'react-router-dom';
 import { Nav, StyledLink } from './Navigation.styled';
 
 export default function Navigation() {
@@ -9,7 +8,6 @@ export default function Navigation() {
     <Nav>
       <StyledLink to="/">Home</StyledLink>
       <StyledLink to="/movies">Movies</StyledLink>
-      {/* <Outlet /> */}
       <Toaster />
     </Nav>
   );

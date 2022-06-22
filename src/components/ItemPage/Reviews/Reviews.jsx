@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import { getReviewsById } from '../../../services/axiosApi';
 import { Ul, Li } from './Reviews.styled';
@@ -36,3 +37,7 @@ export default function Reviews() {
     </div>
   );
 }
+
+Reviews.propTypes = {
+  key: PropTypes.string,
+};
