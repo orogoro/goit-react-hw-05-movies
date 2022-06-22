@@ -22,6 +22,7 @@ export default function MovieDetails({ onSubmit }) {
   const handleSubmit = async (values, { resetForm }) => {
     if (!values.name) {
       toast.error('Bы ничего не ввели');
+      return;
     }
     onSubmit(values.name);
     resetForm();

@@ -9,27 +9,21 @@ import { LoaderSpiner } from 'components/Loader/Loader';
 
 export default function MoviesPage() {
   const [qwery, setQwery] = useState('');
-  const [value, setValue] = useState('');
   const [loading, setLoading] = useState(false);
-  let [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const currentSearch = searchParams.get('query');
 
   const searchQuery = name => {
-    setValue(name);
+    setSearchParams({ query: name });
   };
-
-  useEffect(() => {
-    setValue(currentSearch);
-  }, [currentSearch]);
 
   useEffect(() => {
     async function fetchFilms() {
       try {
         setLoading(true);
-        const values = await getFetchFilms(value);
+        const values = await getFetchFilms(currentSearch);
         if (values.length > 0) {
           setQwery(values);
-          setSearchParams({ query: value });
         } else {
           toast.error('Фильм не найден');
         }
@@ -39,10 +33,10 @@ export default function MoviesPage() {
         setLoading(false);
       }
     }
-    if (value) {
+    if (currentSearch) {
       fetchFilms();
     }
-  }, [setSearchParams, value]);
+  }, [currentSearch, setSearchParams]);
 
   return (
     <main>

@@ -36,26 +36,27 @@ export default function ItemPage() {
     getFetcheFilms();
   }, [itemId, navigate]);
 
-  const onClickBtnBack = () => {
-    if (location.pathname === `/movies/${item.id}`) {
-      navigate(-1);
-      return;
-    } else if (location.pathname === `/movies/${item.id}/cast`) {
-      navigate(-2);
-      return;
-    } else if (location.pathname === `/movies/${item.id}/reviews`) {
-      navigate(-2);
-      return;
-    }
-    navigate('/');
-  };
+  // const onClickBtnBack = () => {
+
+  // if (location.pathname === `/movies/${item.id}`) {
+  //   navigate(-1);
+  //   return;
+  // } else if (location.pathname === `/movies/${item.id}/cast`) {
+  //   navigate(-2);
+  //   return;
+  // } else if (location.pathname === `/movies/${item.id}/reviews`) {
+  //   navigate(-2);
+  //   return;
+  // }
+  // navigate('/');
+  // };
 
   return (
     <Main>
-      {item && <StyleLink onClick={onClickBtnBack}>🔙 Go back</StyleLink>}
+      {item && (
+        <StyleLink to={location?.state?.from ?? '/'}>🔙 Go back</StyleLink>
+      )}
       {!item && <LoaderSpiner />}
-
-      {/* <StyleLink to="/">🔙 Go back</StyleLink> */}
 
       {item && <Publication item={item} />}
       {item && (
