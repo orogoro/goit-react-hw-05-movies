@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 import { getCreditsById } from '../../../services/axiosApi';
 
@@ -45,6 +45,6 @@ export default function Cast() {
   );
 }
 
-Cast.propTypes = {
-  key: PropTypes.string,
-};
+// Cast.propTypes = {
+//   key: PropTypes.string,
+// };

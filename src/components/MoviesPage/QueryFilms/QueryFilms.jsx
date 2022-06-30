@@ -7,10 +7,10 @@ export default function QueryFilms({ qwery }) {
   let location = useLocation();
   return (
     <Ul>
-      {qwery.map(film => (
-        <Li key={film.id}>
-          <StyledLink to={`/movies/${film.id}`} state={{ from: location }}>
-            🎥 {film.original_title}
+      {qwery.map(({ id, original_title }) => (
+        <Li key={id}>
+          <StyledLink to={`/movies/${id}`} state={{ from: location }}>
+            🎥 {original_title}
           </StyledLink>
         </Li>
       ))}
@@ -19,5 +19,10 @@ export default function QueryFilms({ qwery }) {
 }
 
 QueryFilms.propTypes = {
-  key: PropTypes.string,
+  qwery: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      original_title: PropTypes.string.isRequired,
+    })
+  ),
 };

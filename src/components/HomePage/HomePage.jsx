@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { useFetchItems } from '../../services/CustomFetchItems';
 import { LoaderSpiner } from '../Loader/Loader';
 
@@ -46,6 +46,6 @@ export default function HomePage() {
   );
 }
 
-HomePage.propTypes = {
-  key: PropTypes.string,
-};
+// HomePage.propTypes = {
+//   key: PropTypes.string,
+// };

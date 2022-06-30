@@ -1,5 +1,6 @@
 import { Formik, ErrorMessage } from 'formik';
 import * as yup from 'yup';
+import PropTypes from 'prop-types';
 
 import toast from 'react-hot-toast';
 
@@ -45,6 +46,10 @@ export default function MovieDetails({ onSubmit }) {
     </Formik>
   );
 }
+
+MovieDetails.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
 
 // const [value, setValue] = useState('');
 // const [qwery, setQwery] = useState('');
