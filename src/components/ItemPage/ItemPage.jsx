@@ -23,7 +23,6 @@ export default function ItemPage() {
 
   let navigate = useNavigate();
   let location = useLocation();
-  console.log(location);
 
   useEffect(() => {
     async function getFetcheFilms() {
