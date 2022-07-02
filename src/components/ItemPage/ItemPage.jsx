@@ -67,10 +67,20 @@ export default function ItemPage() {
             <P>Additional Information</P>
             <Ul>
               <Li>
-                <NavLinkStyle to="cast">Cast</NavLinkStyle>
+                <NavLinkStyle
+                  to="cast"
+                  state={{ from: location?.state?.from ?? '/' }}
+                >
+                  Cast
+                </NavLinkStyle>
               </Li>
               <Li>
-                <NavLinkStyle to="reviews">Reviews</NavLinkStyle>
+                <NavLinkStyle
+                  to="reviews"
+                  state={{ from: location?.state?.from ?? '/' }}
+                >
+                  Reviews
+                </NavLinkStyle>
               </Li>
             </Ul>
           </Div>
