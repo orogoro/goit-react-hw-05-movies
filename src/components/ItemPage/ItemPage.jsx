@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, Outlet, useNavigate, useLocation } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import { Suspense } from 'react';
 
 import { getTrendFilmById } from '../../services/axiosApi';
 import { LoaderSpiner } from 'components/Loader/Loader';
@@ -22,6 +23,7 @@ export default function ItemPage() {
 
   let navigate = useNavigate();
   let location = useLocation();
+  console.log(location);
 
   useEffect(() => {
     async function getFetcheFilms() {
@@ -76,8 +78,9 @@ export default function ItemPage() {
           <hr />
         </>
       )}
-
-      <Outlet />
+      <Suspense fallback={<LoaderSpiner />}>
+        <Outlet />
+      </Suspense>
     </Main>
   );
 }

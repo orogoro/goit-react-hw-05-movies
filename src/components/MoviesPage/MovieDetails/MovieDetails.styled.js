@@ -1,13 +1,13 @@
 import styled from 'styled-components';
-import { Form, Field } from 'formik';
+// import { Form, Field } from 'formik';
 
-export const Input = styled(Field)`
+export const Input = styled.input`
   width: 250px;
   padding: 5px;
   font-size: 15px;
 `;
 
-export const Forma = styled(Form)`
+export const Form = styled.form`
   width: 350px;
   display: flex;
   flex-wrap: wrap;
@@ -32,7 +32,7 @@ export const Button = styled.button`
   }
 `;
 
-export const P = styled.p`
-  color: red;
-  margin-top: 5px;
-`;
+// export const P = styled.p`
+//   color: red;
+//   margin-top: 5px;
+// `;

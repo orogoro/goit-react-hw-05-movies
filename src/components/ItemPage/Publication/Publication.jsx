@@ -14,32 +14,34 @@ export default function Publication({
 }) {
   // console.log(item);
   return (
-    <Article>
-      <img
-        src={`https://image.tmdb.org/t/p/w200/${poster_path}`}
-        alt={original_title}
-      />
-      <Container>
-        <h2>
-          {original_title} (<span>{release_date.slice(0, 4)}</span>)
-        </h2>
-        <p>User score: {vote_average * 10}%</p>
-        <Ul>
-          <li>
-            <h3>Overview</h3>
-            <p>{overview}</p>
-          </li>
-          <li>
-            <h3>Genres</h3>
-            <p>
-              {genres.map(({ id, name }) => (
-                <Span key={id}>{name}</Span>
-              ))}
-            </p>
-          </li>
-        </Ul>
-      </Container>
-    </Article>
+    <>
+      <Article>
+        <img
+          src={`https://image.tmdb.org/t/p/w200/${poster_path}`}
+          alt={original_title}
+        />
+        <Container>
+          <h2>
+            {original_title} (<span>{release_date.slice(0, 4)}</span>)
+          </h2>
+          <p>User score: {vote_average * 10}%</p>
+          <Ul>
+            <li>
+              <h3>Overview</h3>
+              <p>{overview}</p>
+            </li>
+            <li>
+              <h3>Genres</h3>
+              <p>
+                {genres.map(({ id, name }) => (
+                  <Span key={id}>{name}</Span>
+                ))}
+              </p>
+            </li>
+          </Ul>
+        </Container>
+      </Article>
+    </>
   );
 }
 

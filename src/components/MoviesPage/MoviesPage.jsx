@@ -13,10 +13,6 @@ export default function MoviesPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const currentSearch = searchParams.get('query');
 
-  const searchQuery = name => {
-    setSearchParams({ query: name });
-  };
-
   useEffect(() => {
     async function fetchFilms() {
       try {
@@ -40,7 +36,7 @@ export default function MoviesPage() {
 
   return (
     <main>
-      <MovieDetails onSubmit={searchQuery} />
+      <MovieDetails />
 
       {loading && <LoaderSpiner />}
 

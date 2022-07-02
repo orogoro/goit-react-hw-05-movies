@@ -1,55 +1,47 @@
-import { Formik, ErrorMessage } from 'formik';
-import * as yup from 'yup';
-import PropTypes from 'prop-types';
+import { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 import toast from 'react-hot-toast';
 
-import { Input, Forma, Button, P } from './MovieDetails.styled';
+import { Input, Form, Button } from './MovieDetails.styled';
 
-const validationSchema = yup.object().shape({
-  name: yup
-    .string()
-    .min(2, 'Too Short!')
-    .max(35, 'Too Long!')
-    .lowercase()
-    .trim(),
-});
+export default function MovieDetails() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const currentSearch = searchParams.get('query');
+  const [value, setValue] = useState(currentSearch ?? '');
 
-const FormError = ({ name }) => {
-  return <ErrorMessage name={name} render={massege => <P>{massege}</P>} />;
-};
+  const handleInputChange = e => {
+    setValue(e.currentTarget.value.toLowerCase());
+  };
 
-export default function MovieDetails({ onSubmit }) {
-  const handleSubmit = async (values, { resetForm }) => {
-    if (!values.name) {
+  const searchQuery = name => {
+    setSearchParams({ query: name });
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+
+    if (!value) {
       toast.error('Bы ничего не ввели');
       return;
     }
-    onSubmit(values.name);
-    resetForm();
+    searchQuery(value);
   };
 
   return (
-    <Formik
-      initialValues={{ name: '' }}
-      onSubmit={handleSubmit}
-      validationSchema={validationSchema}
-    >
-      <Forma>
-        <Input className="" type="text" name="name" />
+    <Form onSubmit={handleSubmit}>
+      <Input
+        type="text"
+        name="name"
+        value={value}
+        onChange={handleInputChange}
+        autoComplete="off"
+      />
 
-        <Button className="" type="submit">
-          Search
-        </Button>
-        <FormError name="name" />
-      </Forma>
-    </Formik>
+      <Button type="submit">Search</Button>
+    </Form>
   );
 }
-
-MovieDetails.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-};
 
 // const [value, setValue] = useState('');
 // const [qwery, setQwery] = useState('');
